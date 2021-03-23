@@ -35,34 +35,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := radiosonde-blinky
+BUILD_ARTIFACT_NAME := radiosonde-blinky-all
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX := 
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-radiosonde-blinky.elf \
+radiosonde-blinky-all.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-radiosonde-blinky.list \
+radiosonde-blinky-all.list \
 
 OBJCOPY_BIN += \
-radiosonde-blinky.bin \
+radiosonde-blinky-all.bin \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: radiosonde-blinky.elf secondary-outputs
+main-build: radiosonde-blinky-all.elf secondary-outputs
 
 # Tool invocations
-radiosonde-blinky.elf: $(OBJS) $(USER_OBJS) Z:\Develop\cube-ide\radiosonde-blinky\STM32F100C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "radiosonde-blinky.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"Z:\Develop\cube-ide\radiosonde-blinky\STM32F100C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="radiosonde-blinky.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+radiosonde-blinky-all.elf: $(OBJS) $(USER_OBJS) Z:\Develop\cube-ide\radiosonde-blinky-all\STM32F100C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "radiosonde-blinky-all.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"Z:\Develop\cube-ide\radiosonde-blinky-all\STM32F100C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="radiosonde-blinky-all.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -71,13 +71,13 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-radiosonde-blinky.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "radiosonde-blinky.list"
+radiosonde-blinky-all.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "radiosonde-blinky-all.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-radiosonde-blinky.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "radiosonde-blinky.bin"
+radiosonde-blinky-all.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "radiosonde-blinky-all.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
